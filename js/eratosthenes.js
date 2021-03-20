@@ -17,7 +17,7 @@ function add_number(n) {
         draw_prime();
     }
     disable();
-    if (str_len === 6){
+    if (str_len === 6) {
         no_longer_disable()
     }
 }
@@ -48,12 +48,12 @@ function is_prime(n) {
     sieve[0] = false;
     sieve[1] = false;
     sieve[2] = true;
-    for (let i = 3; i <= n; i++){
+    for (let i = 3; i <= n; i++) {
         sieve[i] = i % 2 !== 0;
     }
-    for(let i = 3; i <= max; i++){
-        if (sieve[i] === true){
-            for (let j = i * i; j <= n; j += i){
+    for (let i = 3; i <= max; i++) {
+        if (sieve[i] === true) {
+            for (let j = i * i; j <= n; j += i) {
                 sieve[j] = false;
             }
         }
@@ -68,13 +68,15 @@ function disable() {
         num.disabled = !frag;
     }
 }
-function no_longer_disable(){
+
+function no_longer_disable() {
     for (let i = 0; i <= 9; i++) {
         let num = document.getElementById(String(i));
         num.disabled = true;
     }
 }
-function ac_disable(){
+
+function ac_disable() {
     for (let i = 0; i <= 9; i++) {
         let num = document.getElementById(String(i));
         num.disabled = false;
