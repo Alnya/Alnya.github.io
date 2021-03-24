@@ -6,4 +6,4 @@ Alnya's portfolio
 
 ## Apps
 
-- [PRIME-JUDGE](https://alnya.github.io/index.html) by eratosthenes algorithm
+- [PRIME-JUDGE](https://alnya.github.io/prime-judge/index.html) by eratosthenes algorithm
