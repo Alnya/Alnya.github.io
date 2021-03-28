@@ -50,6 +50,7 @@
     font-family: serif;
     font-size: 300%;
     padding-left: 50px;
+    padding-right: 50px;
 }
 
 .ml2 .letter {
@@ -64,5 +65,6 @@
     opacity: 0;
     font-size: 60%;
     padding-left: 50px;
+    padding-right: 50px;
 }
 
