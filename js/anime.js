@@ -62,11 +62,15 @@ window.onload = anime.timeline({loop: false})
         duration: DURATION_TIME,
         delay: (el, i) => 70 * i,
         offset: DURATION_TIME * 3 + 50
+    })
+    .add({
+        targets: '.ml2 .apps',
+        scale: [4, 1],
+        opacity: [0, 1],
+        translateZ: 0,
+        easing: "easeOutExpo",
+        // duration: 950,
+        duration: DURATION_TIME,
+        delay: (el, i) => 70 * i,
+        offset: '-=600'
     });
-// .add({
-//         targets: '.ml2',
-//         opacity: 0,
-//         duration: 1000,
-//         easing: "easeOutExpo",
-//         delay: 1000
-//     });
