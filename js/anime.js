@@ -46,3 +46,27 @@ window.onload = anime.timeline({loop: false})
 //     easing: "easeOutExpo",
 //     delay: 1000
 // });
+
+// Wrap every letter in a span
+let textWrapper = document.querySelector('.ml2');
+textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+window.onload = anime.timeline({loop: false})
+    .add({
+        targets: '.ml2 .letter',
+        scale: [4, 1],
+        opacity: [0, 1],
+        translateZ: 0,
+        easing: "easeOutExpo",
+        // duration: 950,
+        duration: DURATION_TIME,
+        delay: (el, i) => 70 * i,
+        offset: DURATION_TIME * 3 + 50
+    });
+// .add({
+//         targets: '.ml2',
+//         opacity: 0,
+//         duration: 1000,
+//         easing: "easeOutExpo",
+//         delay: 1000
+//     });
