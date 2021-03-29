@@ -43,6 +43,7 @@
     display: inline-block;
     opacity: 0;
     font-family: Century;
+    line-height: 120%;
 }
 
 .ml2 {
