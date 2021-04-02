@@ -1,0 +1,20 @@
+table, tr, td {
+    color: red;
+    margin: auto;
+    border: 2px solid black;
+}
+
+td {
+    height: 70px;
+    width: 70px;
+}
+
+body {
+    padding-top: 20px;
+}
+
+.alnya{
+    text-align: center;
+    font-family: serif;
+    font-size: 3em;
+}
