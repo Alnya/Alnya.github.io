@@ -6,7 +6,7 @@ window.onload = function addTableChildren() {
         for (let j = 0; j < 8; j++) {
             let td = document.createElement("td");
             // td.innerHTML = i + "," + j
-            td.innerHTML = "<button class=\"btn btn-info\" onclick=al(3)>" + i + "," + j + "</button>";
+            td.innerHTML = "<button class=\"btn btn-info\" onclick=al(3) style='font-size: 40px'>" + i + "," + j + "</button>";
             // if (i === 3) {
             //     td.style.backgroundColor = "red";
             //     td.innerHTML = "<button class=\"btn btn-info\" style='background-color: red'>" + i + "," + j + "</button>";
