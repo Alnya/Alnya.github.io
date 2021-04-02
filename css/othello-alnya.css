@@ -5,8 +5,9 @@ table, tr, td {
 }
 
 td {
-    height: 70px;
-    width: 70px;
+    /*height: 70px;*/
+    /*width: 70px;*/
+    text-align: center;
 }
 
 body {
