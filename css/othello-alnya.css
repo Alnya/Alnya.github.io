@@ -1,0 +1,33 @@
+table, tr, td {
+    color: red;
+    margin: auto;
+    border: 2px solid black;
+}
+
+td {
+    height: 80px;
+    width: 80px;
+    text-align: center;
+}
+
+body {
+    padding-top: 20px;
+}
+
+.alnya{
+    text-align: center;
+    font-family: serif;
+    font-size: 3em;
+}
+
+button {
+    height: 80px;
+    width: 80px;
+    text-align: center;
+}
+
+button:disabled{
+    background-color: inherit;
+    color: inherit;
+    cursor: not-allowed;
+}
