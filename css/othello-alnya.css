@@ -25,3 +25,9 @@ button {
     width: 80px;
     text-align: center;
 }
+
+button:disabled{
+    background-color: inherit;
+    color: inherit;
+    cursor: not-allowed;
+}
