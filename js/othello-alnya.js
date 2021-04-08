@@ -22,6 +22,7 @@ window.onload = function add_table_children() {
     }
     get_moves(create_form_data());
     color_ac();
+    show_scores();
 }
 
 function update_board(data) {
@@ -34,6 +35,7 @@ function update_board(data) {
         button.innerHTML = board[i];
     }
     color_ac();
+    show_scores();
 }
 
 function post() {
@@ -45,7 +47,13 @@ function post() {
             promise.then((data) => {
                 update_board(data);
                 formData = create_form_data();
-                get_moves(formData);
+                if (data['action'].length === 0) {
+                    get_moves(formData, true);
+                } else {
+                    get_moves(formData);
+                }
+                // get_moves(formData);
+                show_scores();
             });
         }).catch(error => {
         console.log(error);
@@ -64,6 +72,7 @@ function execute(id) {
             promise.then((data) => {
                 update_board(data);
                 post();
+                show_scores();
             });
         }).catch(error => {
         console.log(error);
@@ -82,7 +91,7 @@ function create_form_data() {
     return formData;
 }
 
-function get_moves(formData) {
+function get_moves(formData, frag = false) {
     // let check_url = "https://othello-arena-api.herokuapp.com/check";
     // fetch(check_url, {mode: "cors", method: 'POST', body: formData})
     //     .then(response => {
@@ -105,7 +114,9 @@ function get_moves(formData) {
             promise.then((data) => {
                 let moves = data['moves'];
                 console.log(moves);
-                if (moves.length === 0) {
+                if (frag && moves.length === 0) {
+                    game_over();
+                } else if (moves.length === 0) {
                     post();
                 }
                 button_disabled();
@@ -157,10 +168,37 @@ function color_ac() {
 }
 
 function game_over() {
+    let player = document.getElementById("player");
+    let alnya = document.getElementById("alnya");
+    let player_score = parseInt(player.innerHTML);
+    let alnya_score = parseInt(alnya.innerHTML);
+    let winner = document.getElementById("winner");
+    if (player_score > alnya_score) {
+        winner.innerHTML = "Player Win!";
+        winner.style.color = "red";
+    } else if (player_score < alnya_score) {
+        winner.innerHTML = "Player Lose...";
+        winner.style.color = "blue";
+    } else {
+        winner.innerHTML = "Draw";
+        winner.style.color = "green";
+    }
+}
+
+function show_scores() {
+    let player_score = 0;
+    let alnya_score = 0;
     for (let i = 0; i < 64; i++) {
         let button = document.getElementById(`${i}`);
-        let color = "red";
-        button.style.backgroundColor = color;
-        button.style.color = color;
+        let score = button.innerHTML;
+        if (score === "1") {
+            player_score += 1;
+        } else if (score === "-1") {
+            alnya_score += 1;
+        }
     }
+    let player = document.getElementById("player");
+    let alnya = document.getElementById("alnya");
+    player.innerHTML = `${player_score}`;
+    alnya.innerHTML = `${alnya_score}`;
 }
