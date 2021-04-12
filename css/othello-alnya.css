@@ -14,7 +14,7 @@ body {
     padding-top: 20px;
 }
 
-.alnya{
+.alnya {
     text-align: center;
     font-family: serif;
     font-size: 3em;
@@ -26,13 +26,29 @@ button {
     text-align: center;
 }
 
-button:disabled{
+button:disabled {
     background-color: inherit;
     color: inherit;
     cursor: not-allowed;
 }
 
-.scores{
+.scores {
+    text-align: center;
+    font-family: serif;
+    font-size: 3em;
+}
+
+.turn-button {
+    text-align: center;
+    background-color: green;
+    color: white;
+    height: 150px;
+    width: 300px;
+}
+
+.turn {
+    padding: 100px;
+    margin: auto;
     text-align: center;
     font-family: serif;
     font-size: 3em;

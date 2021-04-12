@@ -1,4 +1,16 @@
-window.onload = function add_table_children() {
+function turn_button(is_first) {
+    if (is_first) {
+        add_table_children(is_first);
+    } else {
+        add_table_children(is_first);
+    }
+    let scores = document.getElementById("scores");
+    scores.style.visibility = "visible";
+    let turn_buttons = document.getElementById("turn");
+    turn_buttons.style.display = "none";
+}
+
+function add_table_children(is_first) {
     const table = document.getElementById("othello");
     for (let i = 0; i < 8; i++) {
         let tr = document.createElement("tr");
@@ -13,14 +25,15 @@ window.onload = function add_table_children() {
             if (i === 3 && j === 4 || i === 4 && j === 3) {
                 td.innerHTML = `<button id=${id} class="btn btn-info" onclick=execute(${id}) style='font-size: 40px' disabled=true>` + 1 + "</button>";
             }
-            // if (i === 3) {
-            //     td.style.backgroundColor = "red";
-            //     td.innerHTML = "<button class=\"btn btn-info\" style='background-color: red'>" + i + "," + j + "</button>";
-            // }
             table.appendChild(td);
         }
     }
-    get_moves(create_form_data());
+    if (is_first) {
+        get_moves(create_form_data());
+    } else {
+        post();
+    }
+    // get_moves(create_form_data());
     color_ac();
     show_scores();
 }
@@ -52,7 +65,6 @@ function post() {
                 } else {
                     get_moves(formData);
                 }
-                // get_moves(formData);
                 show_scores();
             });
         }).catch(error => {
@@ -92,21 +104,6 @@ function create_form_data() {
 }
 
 function get_moves(formData, frag = false) {
-    // let check_url = "https://othello-arena-api.herokuapp.com/check";
-    // fetch(check_url, {mode: "cors", method: 'POST', body: formData})
-    //     .then(response => {
-    //         let promise = response.text();
-    //         promise.then((data) => {
-    //             if(data === "1"){
-    //                 alert(1);
-    //                 game_over()
-    //             } else {
-    //                 alert(2);
-    //             }
-    //         });
-    //     }).catch(error => {
-    //     console.log(error);
-    // });
     let base_url = "https://othello-arena-api.herokuapp.com/get_moves";
     fetch(base_url, {mode: "cors", method: 'POST', body: formData})
         .then(response => {
