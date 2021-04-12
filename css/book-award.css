@@ -4,7 +4,8 @@ img {
     height: auto;
     border: 2px white solid;
 }
-body{
+
+body {
     -webkit-text-size-adjust: 100%;
     background-color: black;
 }
