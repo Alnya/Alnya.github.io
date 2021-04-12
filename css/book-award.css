@@ -1,5 +1,11 @@
 img {
     position: absolute;
-    width: 40%;
+    width: 150px;
     height: auto;
+    border: 2px white solid;
+}
+
+body {
+    -webkit-text-size-adjust: 100%;
+    background-color: black;
 }
