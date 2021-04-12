@@ -9,16 +9,15 @@
 </head>
 <body>
 <h1 class="alnya">OthelloArena by Alnya</h1>
-<!--<table>-->
-<!--    <tr>-->
-<!--        <td id="player"></td>-->
-<!--        <td id="alnya"></td>-->
-<!--    </tr>-->
-<!--</table>-->
-<div class="scores">
-    player:
+<div id="turn" class="turn">
+    先手か後手を選んでください<br><br>
+    <button class="turn-button" onclick="turn_button(true)">先手</button>
+    <button class="turn-button" onclick="turn_button(false)">後手</button>
+</div>
+<div id="scores" class="scores" style="visibility: hidden">
+    Player(黒):
     <span id="player"></span>
-    &nbsp alnya:
+    &nbsp Alnya(白):
     <span id="alnya"></span>
 </div>
 <div id="winner" class="scores"></div>
