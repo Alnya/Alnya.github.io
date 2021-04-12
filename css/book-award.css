@@ -2,4 +2,9 @@ img {
     position: absolute;
     width: 40%;
     height: auto;
+    border: 2px white solid;
+}
+body{
+    -webkit-text-size-adjust: 100%;
+    background-color: black;
 }
