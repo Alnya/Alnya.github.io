@@ -18,12 +18,12 @@ function add_table_children(is_first) {
         for (let j = 0; j < 8; j++) {
             let td = document.createElement("td");
             let id = i * 8 + j;
-            td.innerHTML = `<button id=${id} class="btn btn-info" onclick=execute(${id}) style='font-size: 40px' disabled=true>` + 0 + "</button>";
+            td.innerHTML = `<button id=${id} class="btn btn-info" onclick=execute(${id}) style='font-size: 0' disabled=true>` + 0 + "</button>";
             if (i === 3 && j === 3 || i === 4 && j === 4) {
-                td.innerHTML = `<button id=${id} class="btn btn-info" onclick=execute(${id}) style='font-size: 40px' disabled=true>` + -1 + "</button>";
+                td.innerHTML = `<button id=${id} class="btn btn-info" onclick=execute(${id}) style='font-size: 0' disabled=true>` + -1 + "</button>";
             }
             if (i === 3 && j === 4 || i === 4 && j === 3) {
-                td.innerHTML = `<button id=${id} class="btn btn-info" onclick=execute(${id}) style='font-size: 40px' disabled=true>` + 1 + "</button>";
+                td.innerHTML = `<button id=${id} class="btn btn-info" onclick=execute(${id}) style='font-size: 0' disabled=true>` + 1 + "</button>";
             }
             table.appendChild(td);
         }
@@ -45,6 +45,9 @@ function update_board(data) {
     console.log("success!")
     for (let i = 0; i < board.length; i++) {
         let button = document.getElementById(`${i}`);
+        if (button.innerHTML !== board[i]) {
+            button.style.backgroundColor = "pink";
+        }
         button.innerHTML = board[i];
     }
     color_ac();
@@ -144,27 +147,20 @@ function button_disabled() {
 
 function color_change_to_black(id) {
     let button = document.getElementById(id);
-    let color = "black";
-    button.style.backgroundColor = color;
-    button.style.color = color;
-    // button.style.backgroundImage = "url('https://alnya.github.io/othello-alnya/images/black-stone.jpg')";
+    button.style.backgroundColor = "pink";
+    button.style.backgroundImage = "url('https://alnya.github.io/othello-alnya/images/black-stone.png')";
     button.disabled = true;
 }
 
 function color_ac() {
     for (let i = 0; i < 64; i++) {
         let button = document.getElementById(`${i}`);
-        let color = "green";
-        button.style.backgroundColor = color;
+        button.style.backgroundColor = "green";
         if (button.innerHTML === "1") {
-            color = "black";
-            // button.style.backgroundImage = "url('https://alnya.github.io/othello-alnya/images/black-stone.jpg')";
+            button.style.backgroundImage = "url('https://alnya.github.io/othello-alnya/images/black-stone.png')";
         } else if (button.innerHTML === "-1") {
-            color = "white";
-            // button.style.backgroundImage = "url('https://alnya.github.io/othello-alnya/images/white-stone.jpg')";
+            button.style.backgroundImage = "url('https://alnya.github.io/othello-alnya/images/white-stone.png')";
         }
-        button.style.backgroundColor = color;
-        button.style.color = color;
     }
 }
 
