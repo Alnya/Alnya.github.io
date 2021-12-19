@@ -20,6 +20,12 @@ body {
     font-size: 3em;
 }
 
+.mode {
+    text-align: center;
+    font-family: serif;
+    font-size: 2em;
+}
+
 button {
     height: 80px;
     width: 80px;

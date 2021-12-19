@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Othello-Alnya (normal)</title>
+    <link rel="icon" type="img/png" href="https://avatars.githubusercontent.com/u/69311410?v=4">
+    <link rel="apple-touch-icon" href="https://avatars.githubusercontent.com/u/69311410?v=4">
+    <link rel="stylesheet" href="../../css/othello-alnya.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+<h1 class="alnya">OthelloArena by Alnya</h1>
+<h2 class="mode">難易度：ノーマル</h2>
+<div id="turn" class="turn">
+    先手か後手を選んでください<br><br>
+    <button class="turn-button" onclick="turn_button(true)">先手</button>
+    <button class="turn-button" onclick="turn_button(false)">後手</button>
+</div>
+<div id="scores" class="scores" style="visibility: hidden">
+    Player(黒):
+    <span id="player"></span>
+    &nbsp Alnya(白):
+    <span id="alnya"></span>
+</div>
+<div id="winner" class="scores"></div>
+<table id="othello" class="othello"></table>
+<br>
+
+<script src="../../js/othello-alnya-normal.js"></script>
+<script src="../../js/heroku-on.js"></script>
+</body>
+</html>
