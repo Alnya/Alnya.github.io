@@ -157,10 +157,10 @@ function color_ac() {
         button.style.backgroundColor = color;
         if (button.innerHTML === "1") {
             color = "black";
-            button.style.backgroundImage = "url('https://alnya.github.io/othello-alnya/images/black-stone.jpg')";
+            button.style.backgroundImage = "url('https://alnya.github.io/othello-alnya/images/black-stone.png')";
         } else if (button.innerHTML === "-1") {
             color = "white";
-            button.style.backgroundImage = "url('https://alnya.github.io/othello-alnya/images/white-stone.jpg')";
+            button.style.backgroundImage = "url('https://alnya.github.io/othello-alnya/images/white-stone.png')";
         }
         // button.style.backgroundColor = color;
         button.style.color = color;
