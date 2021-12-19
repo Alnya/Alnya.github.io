@@ -52,7 +52,7 @@ function update_board(data) {
 }
 
 function post() {
-    let base_url = "https://othello-arena-api.herokuapp.com/post";
+    let base_url = "https://othello-arena-api.herokuapp.com/post_middle";
     let formData = create_form_data();
     fetch(base_url, {mode: "cors", method: 'POST', body: formData})
         .then(response => {
