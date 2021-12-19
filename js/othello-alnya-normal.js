@@ -147,6 +147,7 @@ function color_change_to_black(id) {
     let color = "black";
     button.style.backgroundColor = color;
     button.style.color = color;
+    // button.style.backgroundImage = "url('https://alnya.github.io/othello-alnya/images/black-stone.jpg')";
     button.disabled = true;
 }
 
@@ -157,12 +158,12 @@ function color_ac() {
         button.style.backgroundColor = color;
         if (button.innerHTML === "1") {
             color = "black";
-            button.style.backgroundImage = "url('https://alnya.github.io/othello-alnya/images/black-stone.jpg')";
+            // button.style.backgroundImage = "url('https://alnya.github.io/othello-alnya/images/black-stone.jpg')";
         } else if (button.innerHTML === "-1") {
             color = "white";
-            button.style.backgroundImage = "url('https://alnya.github.io/othello-alnya/images/white-stone.jpg')";
+            // button.style.backgroundImage = "url('https://alnya.github.io/othello-alnya/images/white-stone.jpg')";
         }
-        // button.style.backgroundColor = color;
+        button.style.backgroundColor = color;
         button.style.color = color;
     }
 }
