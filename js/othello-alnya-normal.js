@@ -154,12 +154,15 @@ function color_ac() {
     for (let i = 0; i < 64; i++) {
         let button = document.getElementById(`${i}`);
         let color = "green";
+        button.style.backgroundColor = color;
         if (button.innerHTML === "1") {
             color = "black";
+            button.style.backgroundImage = "url('https://alnya.github.io/othello-alnya/images/black-stone.jpg')";
         } else if (button.innerHTML === "-1") {
-            color = "white"
+            color = "white";
+            button.style.backgroundImage = "url('https://alnya.github.io/othello-alnya/images/white-stone.jpg')";
         }
-        button.style.backgroundColor = color;
+        // button.style.backgroundColor = color;
         button.style.color = color;
     }
 }
