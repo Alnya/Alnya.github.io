@@ -12,20 +12,11 @@
 <body>
 <h1 class="alnya">OthelloArena by Alnya</h1>
 <div id="turn" class="turn">
-    先手か後手を選んでください<br><br>
-    <button class="turn-button" onclick="turn_button(true)">先手</button>
-    <button class="turn-button" onclick="turn_button(false)">後手</button>
+    難易度を選んでください<br><br>
+    <button class="turn-button" onclick="location.href='./strong/'">ハード</button>
+    <button class="turn-button" onclick="location.href='./middle/'">ノーマル</button>
+    <button class="turn-button" onclick="location.href='./weak/'">イージー</button>
 </div>
-<div id="scores" class="scores" style="visibility: hidden">
-    Player(黒):
-    <span id="player"></span>
-    &nbsp Alnya(白):
-    <span id="alnya"></span>
-</div>
-<div id="winner" class="scores"></div>
-<table id="othello" class="othello"></table>
-
-<script src="../js/othello-alnya.js"></script>
 <script src="../js/heroku-on.js"></script>
 </body>
 </html>
