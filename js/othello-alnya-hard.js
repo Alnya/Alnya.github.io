@@ -6,6 +6,9 @@
 
 const DIFFICULTY = "strong";
 
+// AIが最後に打ったマスのID（ハイライト用）
+let lastAiMove = -1;
+
 function turn_button(is_first) {
     add_table_children(is_first);
     let scores = document.getElementById("scores");
@@ -128,6 +131,7 @@ function post() {
             DIFFICULTY
         );
         board = OthelloLogic.execute(OthelloLogic.deepCopy(board), action, -1);
+        lastAiMove = action[0] + action[1] * 8;
 
         update_board(board);
         get_moves(false);
@@ -211,6 +215,10 @@ function color_ac() {
             button.style.backgroundImage = "url('https://alnya.github.io/othello-alnya/images/black-stone.png')";
         } else if (button.innerHTML === "-1") {
             button.style.backgroundImage = "url('https://alnya.github.io/othello-alnya/images/white-stone.png')";
+        }
+        // AIが最後に打ったマスを薄い赤でハイライト
+        if (i === lastAiMove) {
+            button.style.backgroundColor = "#ff0000";
         }
     }
 }
