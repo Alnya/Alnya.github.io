@@ -1,9 +1,13 @@
+/**
+ * othello-alnya-easy.js
+ * 難易度: イージー (weak)
+ * Heroku API通信を排除し、ローカルのAIロジックで動作する版
+ */
+
+const DIFFICULTY = "weak";
+
 function turn_button(is_first) {
-    if (is_first) {
-        add_table_children(is_first);
-    } else {
-        add_table_children(is_first);
-    }
+    add_table_children(is_first);
     let scores = document.getElementById("scores");
     scores.style.visibility = "visible";
     let turn_buttons = document.getElementById("turn");
@@ -29,105 +33,130 @@ function add_table_children(is_first) {
         }
     }
     if (is_first) {
-        get_moves(create_form_data());
+        get_moves(false);
     } else {
         post();
     }
-    // get_moves(create_form_data());
     color_ac();
     show_scores();
 }
 
-function update_board(data) {
-    let board = data['board'];
-    board = board.toString();
-    board = board.split(",");
-    console.log("success!")
-    for (let i = 0; i < board.length; i++) {
+function getBoardString() {
+    let num = "";
+    for (let i = 0; i < 64; i++) {
         let button = document.getElementById(`${i}`);
-        if (button.innerHTML !== board[i]) {
+        num += button.innerHTML;
+    }
+    return num;
+}
+
+function parseBoardString(num) {
+    const ls = [];
+    let i = 0;
+    while (i < num.length) {
+        if (num[i] === "-") {
+            ls.push(-1);
+            i += 2;
+        } else {
+            ls.push(parseInt(num[i]));
+            i++;
+        }
+    }
+    if (ls.length !== 64) return null;
+    const board = [];
+    for (let r = 0; r < 8; r++) {
+        board.push([]);
+        for (let c = 0; c < 8; c++) {
+            board[r].push(ls[r * 8 + c]);
+        }
+    }
+    return board;
+}
+
+function update_board(board) {
+    const flat = [];
+    for (let i = 0; i < 8; i++) {
+        for (let j = 0; j < 8; j++) {
+            flat.push(board[i][j].toString());
+        }
+    }
+    for (let i = 0; i < flat.length; i++) {
+        let button = document.getElementById(`${i}`);
+        if (button.innerHTML !== flat[i]) {
             button.style.backgroundColor = "pink";
         }
-        button.innerHTML = board[i];
+        button.innerHTML = flat[i];
     }
     color_ac();
     show_scores();
 }
 
 function post() {
-    let base_url = "https://othello-arena-api.herokuapp.com/post_weak";
-    let formData = create_form_data();
-    fetch(base_url, {mode: "cors", method: 'POST', body: formData})
-        .then(response => {
-            let promise = response.json();
-            promise.then((data) => {
-                update_board(data);
-                formData = create_form_data();
-                if (data['action'].length === 0) {
-                    get_moves(formData, true);
-                } else {
-                    get_moves(formData);
-                }
-                show_scores();
-            });
-        }).catch(error => {
-        console.log(error);
-    });
+    setTimeout(() => {
+        const num = getBoardString();
+        let board = parseBoardString(num);
+        if (!board) return;
+
+        const reversedBoard = OthelloLogic.getReverseboard(OthelloLogic.deepCopy(board));
+        const moves = OthelloLogic.getMoves(reversedBoard, 1);
+
+        if (moves.length === 0) {
+            update_board(board);
+            get_moves(true);
+            show_scores();
+            return;
+        }
+
+        const action = OthelloAI.getAction(
+            OthelloLogic.getReverseboard(OthelloLogic.deepCopy(board)),
+            moves,
+            DIFFICULTY
+        );
+        board = OthelloLogic.execute(OthelloLogic.deepCopy(board), action, -1);
+
+        update_board(board);
+        get_moves(false);
+        show_scores();
+    }, 50);
 }
 
 function execute(id) {
     button_disabled();
     color_change_to_black(id);
-    let base_url = "https://othello-arena-api.herokuapp.com/player_execute";
-    let formData = create_form_data();
-    formData.append('action', id)
-    fetch(base_url, {mode: "cors", method: 'POST', body: formData})
-        .then(response => {
-            let promise = response.json();
-            promise.then((data) => {
-                update_board(data);
-                post();
-                show_scores();
-            });
-        }).catch(error => {
-        console.log(error);
-    });
+
+    const num = getBoardString();
+    let board = parseBoardString(num);
+    if (!board) return;
+
+    const action = [id % 8, Math.floor(id / 8)];
+    board = OthelloLogic.execute(OthelloLogic.deepCopy(board), action, 1);
+
+    update_board(board);
+    post();
+    show_scores();
 }
 
+function get_moves(afterAiPass) {
+    const num = getBoardString();
+    const board = parseBoardString(num);
+    if (!board) return;
 
-function create_form_data() {
-    let formData = new FormData();
-    let num = "";
-    for (let i = 0; i < 64; i++) {
-        let button = document.getElementById(`${i}`);
-        num += button.innerHTML;
+    const moves = OthelloLogic.getMoves(OthelloLogic.deepCopy(board), 1);
+    console.log(moves);
+
+    if (afterAiPass && moves.length === 0) {
+        game_over();
+        return;
+    } else if (moves.length === 0) {
+        post();
+        return;
     }
-    formData.append('num', num);
-    return formData;
-}
 
-function get_moves(formData, frag = false) {
-    let base_url = "https://othello-arena-api.herokuapp.com/get_moves";
-    fetch(base_url, {mode: "cors", method: 'POST', body: formData})
-        .then(response => {
-            let promise = response.json();
-            promise.then((data) => {
-                let moves = data['moves'];
-                console.log(moves);
-                if (frag && moves.length === 0) {
-                    game_over();
-                } else if (moves.length === 0) {
-                    post();
-                }
-                button_disabled();
-                for (let i = 0; i < moves.length; i++) {
-                    let id = parseInt(moves[i][0] + parseInt(moves[i][1]) * 8);
-                    color_change(id);
-                }
-            });
-        }).catch(error => {
-        console.log(error);
-    });
+    button_disabled();
+    for (let i = 0; i < moves.length; i++) {
+        let id = moves[i][0] + moves[i][1] * 8;
+        color_change(id);
+    }
 }
 
 function color_change(id) {
