@@ -10,6 +10,27 @@ td {
     text-align: center;
 }
 
+/* 端から2列目の線を太くする（本物のオセロ盤風） */
+/* 2行目の下ボーダー */
+tr:nth-child(2) td {
+    border-bottom: 4px solid black;
+}
+
+/* 6行目の下ボーダー */
+tr:nth-child(6) td {
+    border-bottom: 4px solid black;
+}
+
+/* 2列目の右ボーダー */
+td:nth-child(2) {
+    border-right: 4px solid black;
+}
+
+/* 6列目の右ボーダー */
+td:nth-child(6) {
+    border-right: 4px solid black;
+}
+
 body {
     padding-top: 20px;
 }

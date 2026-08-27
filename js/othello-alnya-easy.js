@@ -29,7 +29,7 @@ function add_table_children(is_first) {
             if (i === 3 && j === 4 || i === 4 && j === 3) {
                 td.innerHTML = `<button id=${id} class="btn btn-info" onclick=execute(${id}) style='font-size: 0' disabled=true>` + 1 + "</button>";
             }
-            table.appendChild(td);
+            tr.appendChild(td);
         }
     }
     if (is_first) {
